@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${Title}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" />
+    <style>
+
+        main > .container {
+            font-size: 200%;
+        }
+    </style>
+</head>
+<body>
+
+    
+        
+            <table class="table table-bordered" ws-template="TableTemplate">
+                <thead>
+                    <tr>
+                        <td>COL_NAME_1</td>
+                        <td>COL_NAME_2</td>
+
+                    </tr>
+                </thead>
+                <tbody ws-hole="MyTableHole" ws-children-template="TableTemplateRow">
+                    <tr>
+                        <td>
+                            ${Name}
+                        </td>
+                        <td> -TEXT_IN_COL_2- </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        
+    
+
+    <div ws-replace="TableTest"></div>
+
+    <nav class="navbar is-transparent" role="navigation" aria-label="dropdown navigation">
+        <h3 class="navbar-item" style="font-weight:bold;">
+            <a href="http://websharper.com">WebSharper</a>
+        </h3>
+        <div class="navbar-item has-dropdown">
+            <a class="navbar-link">Cities</a>
+            <div class="navbar-dropdown is-boxed" ws-hole="Menu">
+                <a ws-template="MenuItem" class="navbar-item" href="${Link}">${Title}</a>
+            </div>
+        </div>
+    </nav>
+    <div ws-replace="Banner">
+        <section class="hero is-info" ws-template="HomeBanner">
+            <div class="hero-body">
+                <p class="title">Home</p>
+            </div>
+        </section>
+        <section class="hero is-info" ws-template="CitiesBanner">
+            <div class="hero-body">
+                <p class="title">Cities</p>
+                <p class="subtitle">Pick your favorite city.</p>
+            </div>
+        </section>
+    </div>
+    <main class="hero-body">
+        <div class="container">
+            <div class="content">
+                <div ws-replace="Body">
+                    <ul ws-template="CityLinks" ws-hole="Links">
+                        <li ws-template="CityLink"><a href="${Link}">${Title}</a></li>
+                    </ul>
+                    <div ws-template="CityPage">
+                        <h1>${Name}</h1>
+                        <div ws-replace="Message">
+                            <div ws-template="NotFound">
+                                <p>I don't know your city :(</p>
+                            </div>
+                            <div ws-template="Found">
+                                <p>Your city is <b>${Kind}</b></p>
+                            </div>
+                        </div>
+                        <p>Click <a href="${BackLink}">here</a> to return.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <div class="content has-text-centered">
+                <p>
+                    For an enhanced template that provides automatic GitHub deployment to Azure, fork from <a href="https://github.com/intellifactory/ClientServer.Azure">GitHub</a>, or
+                    read more <a href="http://websharper.com/blog-entry/4368/deploying-websharper-apps-to-azure-via-github">here</a>.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script ws-replace="scripts"></script>
+    <script type="text/javascript">
+        var dropdown = document.querySelector('.has-dropdown');
+        dropdown.addEventListener('click', function (event) {
+            event.stopPropagation();
+            dropdown.classList.toggle('is-active');
+        });
+    </script>
+</body>
+</html> 
